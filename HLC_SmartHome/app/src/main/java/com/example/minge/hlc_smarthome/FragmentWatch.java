@@ -1,5 +1,6 @@
 package com.example.minge.hlc_smarthome;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentWatch extends Fragment {
-    private Sensor_DHT11 sensorDHT11;
+    private Sensor sensorDHT11, sensorFire, sensorWash, sensorWindow, sensorCO, sensorDoor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -19,8 +20,23 @@ public class FragmentWatch extends Fragment {
     }
 
     private void setSensor(View v) {
-        sensorDHT11=new Sensor_DHT11(getActivity(), v);
+        Activity act = getActivity();
+        sensorDHT11 = new SensorDHT11(act, v);
         sensorDHT11.start();
-    }
 
+        sensorFire = new SensorFire(act, v);
+        sensorFire.start();
+
+        sensorWash = new SensorWash(act, v);
+        sensorWash.start();
+
+        sensorWindow = new SensorWindow(act, v);
+        sensorWindow.start();
+
+        sensorCO = new SensorCO(act, v);
+        sensorCO.start();
+
+        sensorDoor = new SensorDoor(act, v);
+        sensorDoor.start();
+    }
 }

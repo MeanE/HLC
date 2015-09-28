@@ -64,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(MenuItem menuItem) {
         Fragment fragment = null;
-        int position=menuItem.getOrder();
+        int position = menuItem.getOrder();
 
         switch (position) {
             case 0:
                 fragment = new FragmentWatch();
                 break;
 
-            default: return;
+            default:
+                return;
         }
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        toolbar=(Toolbar)findViewById(R.id.tool_bar);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }

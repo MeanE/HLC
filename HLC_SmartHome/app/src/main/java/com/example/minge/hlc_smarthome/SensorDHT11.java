@@ -14,69 +14,78 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**
  * Created by MingE on 2015/9/28.
  */
-public class Sensor_DHT11 extends Thread {
-    URL url;
-    Activity act;
-    View v;
+public class SensorDHT11 extends Sensor {
     TextView tv_wet, tv_temperature;
     Spinner sp_temperatureSign;
 
-    Sensor_DHT11(Activity act, View v) {
+    SensorDHT11(Activity act, View v) {
         this.act = act;
         this.v = v;
-
         initUI();
-        setListener();
         //setURL
-        String channelID = "51197"; //DHT11(�ŷë�)
+        String channelID = "51197"; //DHT11(溫溼度)
         String key = "4536EDXSQ5KJKHM3";
-        //String timeZone = "Asia/Taipei";
+        setURL(channelID, key);
+    }
+
+    @Override
+    protected void setURL(String channelID, String key) {
         String urlString = "http://api.thingspeak.com/channels/" + channelID + "/feed/last.json" +
-                "?key=" + key ;
+                "?key=" + key;
         try {
-            url=new URL(urlString);
+            url = new URL(urlString);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    private void setListener() {
-        sp_temperatureSign.setOnItemSelectedListener(new SpinnerActivity());
-    }
-
-    private void initUI() {
-        tv_wet=(TextView)v.findViewById(R.id.tv_wet);
-        tv_temperature=(TextView)v.findViewById(R.id.tv_temperature);
-        sp_temperatureSign=(Spinner)v.findViewById(R.id.sp_temperatureSign);
+    @Override
+    protected void initUI() {
+        tv_wet = (TextView) v.findViewById(R.id.tv_wet);
+        tv_temperature = (TextView) v.findViewById(R.id.tv_temperature);
+        sp_temperatureSign = (Spinner) v.findViewById(R.id.sp_temperatureSign);
         sp_temperatureSign = (Spinner) v.findViewById(R.id.sp_temperatureSign);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(act,
                 R.array.temperature, R.layout.spinner_temperature_sign);
         adapter.setDropDownViewResource(R.layout.spinner_temperature_sign);
         sp_temperatureSign.setAdapter(adapter);
+        sp_temperatureSign.setOnItemSelectedListener(new SpinnerActivity());
+    }
+
+    @Override
+    protected JSONObject getJSON() {
+        JSONObject jsonObj = null;
+        try {
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream(), "UTF-8"));
+            String jsonString = reader.readLine();
+            reader.close();
+
+            jsonObj = new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObj;
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        connection.getInputStream(), "UTF-8"));
-                String jsonString = reader.readLine();
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(jsonString);
+                JSONObject jsonObj = getJSON();
 
                 final String wet = jsonObj.get("field1").toString() + "%";
 
@@ -106,17 +115,12 @@ public class Sensor_DHT11 extends Thread {
             } catch (InterruptedException e) {
                 Log.i("Chat", e.getMessage());
                 e.printStackTrace();
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     private class SpinnerActivity implements Spinner.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,8 +131,6 @@ public class Sensor_DHT11 extends Thread {
             tv_temperature.setText(String.format("%.1f", temp));
         }
 
-
-        Activity activity;
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
         }

@@ -110,9 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="0dp"
-            android:layout_below="@+id/linearLayout2"
-            android:layout_alignParentStart="true"
             android:id="@+id/linearLayout3"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="35dp">
 
             <TextView
@@ -134,7 +134,10 @@
                 android:drawablePadding="5dp"
                 android:text="無異常"
                 android:id="@+id/tv_co"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_above="@+id/linearLayout4"
+                android:layout_alignParentEnd="true" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -142,10 +145,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="0dp"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_alignParentStart="true"
             android:id="@+id/linearLayout4"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="35dp">
 
             <TextView
@@ -163,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_check"
+                android:drawableRight="@drawable/ic_exclamation"
                 android:drawablePadding="5dp"
                 android:text="洗淨完成"
                 android:id="@+id/tv_wash"
@@ -176,9 +178,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="0dp"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentStart="true"
             android:id="@+id/linearLayout5"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="35dp">
 
             <TextView
@@ -209,7 +211,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="0dp"
-            android:layout_below="@+id/linearLayout5"
+            android:id="@+id/linearLayout6"
+            android:layout_below="@+id/linearLayout4"
             android:layout_alignParentStart="true"
             android:layout_marginTop="35dp">
 
