@@ -1,0 +1,239 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.minge.hlc_smarthome.FragmentWatch">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentStart="false"
+            android:id="@+id/linearLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_wet"
+                android:drawablePadding="5dp"
+                android:text="濕度:"
+                android:id="@+id/textView2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:text="0%"
+                android:id="@+id/tv_wet"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="溫度:"
+                android:drawableLeft="@drawable/ic_sun"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:id="@+id/textView"
+                android:layout_marginLeft="35dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:text="0"
+                android:id="@+id/tv_temperature"
+                android:layout_marginLeft="5dp" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_temperatureSign"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="35dp"
+            android:id="@+id/linearLayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableStart="@drawable/ic_fire"
+                android:drawablePadding="5dp"
+                android:text="瓦斯爐:"
+                android:id="@+id/textView3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableRight="@drawable/ic_check"
+                android:drawablePadding="5dp"
+                android:text="未開啟"
+                android:id="@+id/tv_fire"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_mask"
+                android:drawablePadding="5dp"
+                android:text="一氧化碳濃度:"
+                android:id="@+id/textView4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableRight="@drawable/ic_check"
+                android:drawablePadding="5dp"
+                android:text="無異常"
+                android:id="@+id/tv_co"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout4"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_wash"
+                android:drawablePadding="5dp"
+                android:text="洗衣機:"
+                android:id="@+id/textView5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableRight="@drawable/ic_check"
+                android:drawablePadding="5dp"
+                android:text="洗淨完成"
+                android:id="@+id/tv_wash"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/linearLayout4"
+            android:layout_alignParentStart="true"
+            android:id="@+id/linearLayout5"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_doorlock"
+                android:drawablePadding="5dp"
+                android:text="大門:"
+                android:id="@+id/textView7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableRight="@drawable/ic_exclamation"
+                android:drawablePadding="5dp"
+                android:text="有異物"
+                android:id="@+id/tv_door"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_below="@+id/linearLayout5"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="35dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_window"
+                android:drawablePadding="5dp"
+                android:text="窗戶:"
+                android:id="@+id/textView9" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"
+                android:drawableRight="@drawable/ic_check"
+                android:drawablePadding="5dp"
+                android:text="關閉"
+                android:id="@+id/tv_window"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>
