@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:text="0%"
                 android:id="@+id/tv_wet"
                 android:layout_marginLeft="5dp" />
 
@@ -53,7 +52,7 @@
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:id="@+id/textView"
-                android:layout_marginLeft="35dp" />
+                android:layout_marginLeft="30dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,8 +66,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sp_temperatureSign"
-                android:layout_marginLeft="5dp" />
+                android:id="@+id/sp_temperatureSign" />
 
         </LinearLayout>
 
@@ -97,9 +95,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_check"
                 android:drawablePadding="5dp"
-                android:text="未開啟"
                 android:id="@+id/tv_fire"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -130,9 +126,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_check"
                 android:drawablePadding="5dp"
-                android:text="無異常"
                 android:id="@+id/tv_co"
                 android:layout_marginLeft="5dp"
                 android:layout_above="@+id/linearLayout4"
@@ -165,9 +159,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_exclamation"
                 android:drawablePadding="5dp"
-                android:text="洗淨完成"
                 android:id="@+id/tv_wash"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -198,9 +190,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_exclamation"
                 android:drawablePadding="5dp"
-                android:text="有異物"
                 android:id="@+id/tv_door"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -231,9 +221,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:drawableRight="@drawable/ic_check"
                 android:drawablePadding="5dp"
-                android:text="關閉"
                 android:id="@+id/tv_window"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
