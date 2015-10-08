@@ -52,6 +52,8 @@ public class SensorDHT11 extends Sensor {
         this.act = act;
         this.v = v;
 
+        //wet="";
+        temperature="";
         tv_wet = (TextView) v.findViewById(R.id.tv_wet);
         tv_temperature = (TextView) v.findViewById(R.id.tv_temperature);
         sp_temperatureSign = (Spinner) v.findViewById(R.id.sp_temperatureSign);
@@ -65,7 +67,7 @@ public class SensorDHT11 extends Sensor {
     public class SpinnerActivity implements Spinner.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if(!firstSpinner) {
+            if (!temperature.equals("")) {
                 String tempString = tv_temperature.getText().toString();
                 Double temp = Double.parseDouble(tempString);
                 if (position == 0) temp = (temp - 32) * 5. / 9.;
@@ -171,8 +173,8 @@ public class SensorDHT11 extends Sensor {
                                 public void run() {
                                     tv_wet.setText(wet);
 
-                                    //int spSelect = sp_temperatureSign.getSelectedItemPosition();
-                                    //if (spSelect == 1) temp = temp * (9. / 5.) + 32;
+                                    int spSelect = sp_temperatureSign.getSelectedItemPosition();
+                                    if (spSelect == 1) temp = temp * (9. / 5.) + 32;
                                     temperature = String.format("%.1f", temp);
                                     tv_temperature.setText(temperature);
                                 }

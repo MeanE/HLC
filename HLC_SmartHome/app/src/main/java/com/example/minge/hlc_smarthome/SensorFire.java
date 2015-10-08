@@ -110,15 +110,7 @@ public class SensorFire extends Sensor {
                             int status = Integer.parseInt(jsonObj.get("field1").toString());
                             int id = Integer.parseInt(jsonObj.get("entry_id").toString());
 
-                            if (id != lastId && status == 1) {
-                                act.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        tv_fire.setText("開啟");
-                                        tv_fire.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
-                                    }
-                                });
-                            } else {
+                            if(lastId==-1){
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -127,9 +119,28 @@ public class SensorFire extends Sensor {
                                     }
                                 });
                             }
+                            else {
+                                if (id != lastId && status == 1) {
+                                    act.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tv_fire.setText("開啟");
+                                            tv_fire.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
+                                        }
+                                    });
+                                } else {
+                                    act.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            tv_fire.setText("未開啟");
+                                            tv_fire.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
+                                        }
+                                    });
+                                }
+                            }
                             lastId = id;
 
-                            if (status == 1) Thread.sleep(5000);
+                            if (status == 1) Thread.sleep(10000);
                             else Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             Log.i("Chat", e.getMessage());

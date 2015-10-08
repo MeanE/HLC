@@ -52,14 +52,13 @@
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:id="@+id/textView"
-                android:layout_marginLeft="30dp" />
+                android:layout_marginLeft="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
-                android:text="0"
                 android:id="@+id/tv_temperature"
                 android:layout_marginLeft="5dp" />
 
