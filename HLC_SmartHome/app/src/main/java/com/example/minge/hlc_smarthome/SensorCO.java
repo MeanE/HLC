@@ -21,10 +21,10 @@ import java.net.URL;
 /**
  * Created by MingE on 2015/9/28.
  */
-public class SensorCO extends Sensor{
+public class SensorCO extends Sensor {
     TextView tv_co;
 
-    MyBinder myBinder=new MyBinder();
+    MyBinder myBinder = new MyBinder();
 
     @Override
     protected void setURL() {
@@ -64,7 +64,7 @@ public class SensorCO extends Sensor{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -94,11 +94,11 @@ public class SensorCO extends Sensor{
     }
 
     class MyBinder extends Binder {
-        SensorCO getService(){
+        SensorCO getService() {
             return SensorCO.this;
         }
 
-        void start(){
+        void start() {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -110,7 +110,7 @@ public class SensorCO extends Sensor{
                             int status = Integer.parseInt(jsonObj.get("field1").toString());
                             int id = Integer.parseInt(jsonObj.get("entry_id").toString());
 
-                            if(lastId==-1){
+                            if (lastId == -1) {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -118,8 +118,7 @@ public class SensorCO extends Sensor{
                                         tv_co.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
                                     }
                                 });
-                            }
-                            else {
+                            } else {
                                 if (id != lastId && status == 1) {
                                     act.runOnUiThread(new Runnable() {
                                         @Override
@@ -147,7 +146,7 @@ public class SensorCO extends Sensor{
                             e.printStackTrace();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

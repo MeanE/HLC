@@ -1,12 +1,17 @@
 package com.example.minge.hlc_smarthome;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,11 +34,11 @@ public class SensorDHT11 extends Sensor {
 
     MyBinder myBinder = new MyBinder();
 
-    String wet="", temperature="";
+    String wet = "", temperature = "";
     double temp;
+    int spSelect;
 
-    boolean firstSpinner=true;
-
+    final int NOTIFICATION_ID = 0xa1;
     @Override
     protected void setURL() {
         String channelID = "51197"; //DHT11(溫溼度)
@@ -53,7 +58,7 @@ public class SensorDHT11 extends Sensor {
         this.v = v;
 
         //wet="";
-        temperature="";
+        temperature = "";
         tv_wet = (TextView) v.findViewById(R.id.tv_wet);
         tv_temperature = (TextView) v.findViewById(R.id.tv_temperature);
         sp_temperatureSign = (Spinner) v.findViewById(R.id.sp_temperatureSign);
@@ -133,6 +138,9 @@ public class SensorDHT11 extends Sensor {
                             final String date = String.format("%s %s", dateUntransform.substring(0, d), dateUntransform.substring(d + 1, t));
                             */
                         //Toast.makeText(getApplication(),"dht11",Toast.LENGTH_LONG);
+                        temperature = String.format("%.1f", temp);
+                        setUpNotification();
+
                         Thread.sleep(30000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -145,6 +153,32 @@ public class SensorDHT11 extends Sensor {
             }
         }).start();
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void setUpNotification() {
+        NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
+        notifcationCompatBuilder.setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_house);
+
+        RemoteViews remoteViews = new RemoteViews(this.getPackageName(), R.layout.notification_sensordht11);
+        remoteViews.setTextColor(R.id.notification_wet_text, Color.BLACK);
+        remoteViews.setTextViewText(R.id.notification_wet, wet);
+        remoteViews.setTextColor(R.id.notification_wet, Color.BLACK);
+        remoteViews.setTextColor(R.id.notification_temperature_text, Color.BLACK);
+        remoteViews.setTextViewText(R.id.notification_temperature, temperature);
+        remoteViews.setTextColor(R.id.notification_temperature, Color.BLACK);
+
+        Notification notification = notifcationCompatBuilder.build();
+        notification.contentView = remoteViews;
+        notification.flags = Notification.FLAG_NO_CLEAR;
+
+        Intent intent = new Intent(this, MainActivity.class);
+        //click notification return MainActivity
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.contentIntent = pendingIntent;
+        //startForeground(NOTIFICATION_ID,notification);
+        startForeground(NOTIFICATION_ID, notification);
     }
 
     @Override
@@ -173,16 +207,14 @@ public class SensorDHT11 extends Sensor {
                                 public void run() {
                                     tv_wet.setText(wet);
 
-                                    int spSelect = sp_temperatureSign.getSelectedItemPosition();
+                                    spSelect = sp_temperatureSign.getSelectedItemPosition();
                                     if (spSelect == 1) temp = temp * (9. / 5.) + 32;
                                     temperature = String.format("%.1f", temp);
                                     tv_temperature.setText(temperature);
                                 }
                             });
 
-                            firstSpinner=false;
-
-                            if(wet!="" && temperature!="") Thread.sleep(30000);
+                            if (wet != "" && temperature != "") Thread.sleep(30000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (Exception e) {
