@@ -22,4 +22,6 @@ abstract  class Sensor extends Service {
 
     protected abstract void initUI(Activity act, View v);
 
+    protected abstract void setUpNotification();
+
 }

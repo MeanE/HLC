@@ -32,13 +32,12 @@ public class SensorDHT11 extends Sensor {
     TextView tv_wet, tv_temperature;
     Spinner sp_temperatureSign;
 
-    MyBinder myBinder = new MyBinder();
-
     String wet = "", temperature = "";
     double temp;
     int spSelect;
 
     final int NOTIFICATION_ID = 0xa1;
+
     @Override
     protected void setURL() {
         String channelID = "51197"; //DHT11(溫溼度)
@@ -155,7 +154,8 @@ public class SensorDHT11 extends Sensor {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void setUpNotification() {
+    @Override
+    protected void setUpNotification() {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_house);
@@ -188,7 +188,7 @@ public class SensorDHT11 extends Sensor {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return myBinder;
+        return new MyBinder();
     }
 
     class MyBinder extends Binder {

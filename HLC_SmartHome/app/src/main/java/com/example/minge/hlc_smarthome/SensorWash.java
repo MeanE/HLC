@@ -24,8 +24,6 @@ import java.net.URL;
 public class SensorWash extends Sensor {
     TextView tv_wash;
 
-    MyBinder myBinder = new MyBinder();
-
     @Override
     protected void setURL() {
         String channelID = "55749"; //洗衣機(震動)
@@ -84,13 +82,18 @@ public class SensorWash extends Sensor {
     }
 
     @Override
+    protected void setUpNotification() {
+
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return myBinder;
+        return new MyBinder();
     }
 
     class MyBinder extends Binder {

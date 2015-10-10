@@ -24,8 +24,6 @@ import java.net.URL;
 public class SensorCO extends Sensor {
     TextView tv_co;
 
-    MyBinder myBinder = new MyBinder();
-
     @Override
     protected void setURL() {
         String channelID = "55751"; //一氧化碳濃度(瓦斯)
@@ -84,13 +82,17 @@ public class SensorCO extends Sensor {
     }
 
     @Override
+    protected void setUpNotification() {
+
+    }
+
     public void onDestroy() {
         super.onDestroy();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return myBinder;
+        return new MyBinder();
     }
 
     class MyBinder extends Binder {
@@ -107,7 +109,7 @@ public class SensorCO extends Sensor {
                         try {
                             JSONObject jsonObj = getJSON();
 
-                            int status = Integer.parseInt(jsonObj.get("field1").toString());
+                            //int status = Integer.parseInt(jsonObj.get("field1").toString());
                             int id = Integer.parseInt(jsonObj.get("entry_id").toString());
 
                             if (lastId == -1) {
@@ -119,7 +121,7 @@ public class SensorCO extends Sensor {
                                     }
                                 });
                             } else {
-                                if (id != lastId && status == 1) {
+                                if (id != lastId) {
                                     act.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -127,6 +129,7 @@ public class SensorCO extends Sensor {
                                             tv_co.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
                                         }
                                     });
+                                    Thread.sleep(18000);
                                 } else {
                                     act.runOnUiThread(new Runnable() {
                                         @Override
@@ -135,12 +138,10 @@ public class SensorCO extends Sensor {
                                             tv_co.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
                                         }
                                     });
+                                    Thread.sleep(1000);
                                 }
                             }
                             lastId = id;
-
-                            if (status == 1) Thread.sleep(10000);
-                            else Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             Log.i("Chat", e.getMessage());
                             e.printStackTrace();
