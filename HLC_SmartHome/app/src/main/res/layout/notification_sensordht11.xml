@@ -21,7 +21,7 @@
             android:gravity="center"
             android:drawableLeft="@drawable/ic_wet"
             android:drawablePadding="5dp"
-            android:text="濕度:"
+            android:text="濕度："
             android:id="@+id/notification_wet_text" />
 
         <TextView
@@ -30,18 +30,18 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center"
             android:id="@+id/notification_wet"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="溫度:"
+            android:text="溫度："
             android:drawableLeft="@drawable/ic_sun"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:id="@+id/notification_temperature_text"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center"
             android:id="@+id/notification_temperature"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="2dp" />
 
     </LinearLayout>
 </LinearLayout>

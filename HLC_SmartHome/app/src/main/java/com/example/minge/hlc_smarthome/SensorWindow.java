@@ -1,10 +1,15 @@
 package com.example.minge.hlc_smarthome;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +28,11 @@ import java.net.URL;
  */
 public class SensorWindow extends Sensor {
     TextView tv_window;
+
+    int lastId = -1, id = 0;
+    boolean isError = false;
+
+    final int NOTIFICATION_ID = 0xf1;
 
     @Override
     protected void setURL() {
@@ -78,12 +88,62 @@ public class SensorWindow extends Sensor {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        JSONObject jsonObj = getJSON();
+
+                        //int status = Integer.parseInt(jsonObj.get("field1").toString());
+                        id = Integer.parseInt(jsonObj.get("entry_id").toString());
+
+                        if (lastId != id && lastId != -1) {
+                            //if (intent.getStringExtra("onDestroy").equals("1"))
+                            if (act.isDestroyed())
+                                setUpNotification();
+                            isError = true;
+                            Thread.sleep(18000);
+                        } else {
+                            Thread.sleep(1000);
+                        }
+
+                        lastId = id;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     protected void setUpNotification() {
+        NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_window);
+        notifcationCompatBuilder.setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.logo)
+                .setLargeIcon(bitmap)
+                .setContentTitle("窗戶")
+                .setContentText("是否忘記關閉了呢？")
+                .setDefaults(Notification.DEFAULT_ALL);
 
+        Notification notification = notifcationCompatBuilder.build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        Intent intent = new Intent(this, MainActivity.class);
+        //click notification return MainActivity
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 4,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.contentIntent = pendingIntent;
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ID, notification);
+        //startForeground(NOTIFICATION_ID, notification);
     }
 
     @Override
@@ -105,16 +165,19 @@ public class SensorWindow extends Sensor {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    int lastId = -1;
-                    while (true) {
+                    while (!act.isDestroyed()) {
                         try {
-                            JSONObject jsonObj = getJSON();
-
-
-                            //int status = Integer.parseInt(jsonObj.get("field1").toString());
-                            int id = Integer.parseInt(jsonObj.get("entry_id").toString());
-
-                            if (lastId == -1) {
+                            if (lastId != -1 && isError) {
+                                act.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        tv_window.setText("開啟");
+                                        tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
+                                    }
+                                });
+                                isError = false;
+                                Thread.sleep(18000);
+                            } else {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -122,32 +185,10 @@ public class SensorWindow extends Sensor {
                                         tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
                                     }
                                 });
-                            } else {
-                                if (id != lastId) {
-                                    act.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            tv_window.setText("開啟");
-                                            tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
-                                        }
-                                    });
-                                    Thread.sleep(18000);
-                                } else {
-                                    act.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            tv_window.setText("關閉");
-                                            tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
-                                        }
-                                    });
-                                    Thread.sleep(1000);
-                                }
+                                Thread.sleep(1000);
                             }
-                            lastId = id;
+
                         } catch (InterruptedException e) {
-                            Log.i("Chat", e.getMessage());
-                            e.printStackTrace();
-                        } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (Exception e) {
                             e.printStackTrace();

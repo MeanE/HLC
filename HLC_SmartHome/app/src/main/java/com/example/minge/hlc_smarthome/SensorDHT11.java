@@ -2,7 +2,6 @@ package com.example.minge.hlc_smarthome;
 
 import android.app.Activity;
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Binder;
@@ -172,12 +171,13 @@ public class SensorDHT11 extends Sensor {
         notification.contentView = remoteViews;
         notification.flags = Notification.FLAG_NO_CLEAR;
 
-        Intent intent = new Intent(this, MainActivity.class);
+        /*
         //click notification return MainActivity
+        Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.contentIntent = pendingIntent;
-        //startForeground(NOTIFICATION_ID,notification);
+        */
         startForeground(NOTIFICATION_ID, notification);
     }
 

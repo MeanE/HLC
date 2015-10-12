@@ -32,7 +32,7 @@
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_wet"
                 android:drawablePadding="5dp"
-                android:text="濕度:"
+                android:text="濕度："
                 android:id="@+id/textView2" />
 
             <TextView
@@ -41,18 +41,18 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
                 android:id="@+id/tv_wet"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="溫度:"
+                android:text="溫度："
                 android:drawableLeft="@drawable/ic_sun"
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:id="@+id/textView"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center"
                 android:id="@+id/tv_temperature"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                 android:gravity="center"
                 android:drawableStart="@drawable/ic_fire"
                 android:drawablePadding="5dp"
-                android:text="瓦斯爐:"
+                android:text="瓦斯爐："
                 android:id="@+id/textView3" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:gravity="center"
                 android:drawablePadding="5dp"
                 android:id="@+id/tv_fire"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +117,7 @@
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_mask"
                 android:drawablePadding="5dp"
-                android:text="一氧化碳濃度:"
+                android:text="可燃氣體濃度："
                 android:id="@+id/textView4" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:gravity="center"
                 android:drawablePadding="5dp"
                 android:id="@+id/tv_co"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="2dp"
                 android:layout_above="@+id/linearLayout4"
                 android:layout_alignParentEnd="true" />
 
@@ -150,7 +150,7 @@
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_wash"
                 android:drawablePadding="5dp"
-                android:text="洗衣機:"
+                android:text="洗衣機："
                 android:id="@+id/textView5" />
 
             <TextView
@@ -160,7 +160,7 @@
                 android:gravity="center"
                 android:drawablePadding="5dp"
                 android:id="@+id/tv_wash"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -181,7 +181,7 @@
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_doorlock"
                 android:drawablePadding="5dp"
-                android:text="大門:"
+                android:text="大門口："
                 android:id="@+id/textView7" />
 
             <TextView
@@ -191,7 +191,7 @@
                 android:gravity="center"
                 android:drawablePadding="5dp"
                 android:id="@+id/tv_door"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -212,7 +212,7 @@
                 android:gravity="center"
                 android:drawableLeft="@drawable/ic_window"
                 android:drawablePadding="5dp"
-                android:text="窗戶:"
+                android:text="窗戶："
                 android:id="@+id/textView9" />
 
             <TextView
@@ -222,7 +222,7 @@
                 android:gravity="center"
                 android:drawablePadding="5dp"
                 android:id="@+id/tv_window"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="2dp" />
         </LinearLayout>
 
     </RelativeLayout>

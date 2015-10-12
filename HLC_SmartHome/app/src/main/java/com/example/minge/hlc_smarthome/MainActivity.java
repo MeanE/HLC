@@ -2,6 +2,7 @@ package com.example.minge.hlc_smarthome;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navView;
+
+    Fragment fragment;
+    private Sensor sensorDHT11 = null, sensorFire = null, sensorWash = null, sensorWindow = null, sensorCO = null, sensorDoor = null;
+    private Intent itSensorDHT11, itSensorFire, itSensorWash, itSensorWindow, itSensorCO, itSensorDoor;
 
     boolean doubleBackCheck = false;
 
@@ -49,6 +54,57 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initDrawer();
         initFragment();
+        initService();
+    }
+
+    private void initService() {
+        sensorDHT11 = new SensorDHT11();
+        itSensorDHT11 = new Intent(this, SensorDHT11.class);
+        startService(itSensorDHT11);
+
+        sensorFire = new SensorFire();
+        itSensorFire = new Intent(this, SensorFire.class);
+        startService(itSensorFire);
+
+        sensorWash = new SensorWash();
+        itSensorWash = new Intent(this, SensorWash.class);
+        startService(itSensorWash);
+
+        sensorWindow = new SensorWindow();
+        itSensorWindow = new Intent(this, SensorWindow.class);
+        startService(itSensorWindow);
+
+        sensorCO = new SensorCO();
+        itSensorCO = new Intent(this, SensorCO.class);
+        startService(itSensorCO);
+
+        sensorDoor = new SensorDoor();
+        itSensorDoor = new Intent(this, SensorDoor.class);
+        startService(itSensorDoor);
+    }
+
+    public Sensor getSensorDHT11() {
+        return sensorDHT11;
+    }
+
+    public Sensor getSensorFire() {
+        return sensorFire;
+    }
+
+    public Sensor getSensorWash() {
+        return sensorWash;
+    }
+
+    public Sensor getSensorWindow() {
+        return sensorWindow;
+    }
+
+    public Sensor getSensorCO() {
+        return sensorCO;
+    }
+
+    public Sensor getSensorDoor() {
+        return sensorDoor;
     }
 
     private void initFragment() {
@@ -86,12 +142,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(MenuItem menuItem) {
-        Fragment fragment = null;
         int position = menuItem.getOrder();
 
         switch (position) {
             case 0:
                 fragment = new FragmentWatch();
+
                 break;
 
             default:
