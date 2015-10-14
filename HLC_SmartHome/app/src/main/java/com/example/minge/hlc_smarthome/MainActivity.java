@@ -14,15 +14,16 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
+    private TextView toolbarTitle;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navView;
 
-    Fragment fragment;
     private Sensor sensorDHT11 = null, sensorFire = null, sensorWash = null, sensorWindow = null, sensorCO = null, sensorDoor = null;
     private Intent itSensorDHT11, itSensorFire, itSensorWash, itSensorWindow, itSensorCO, itSensorDoor;
 
@@ -142,27 +143,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(MenuItem menuItem) {
-        int position = menuItem.getOrder();
+        int id = menuItem.getItemId();
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
 
-        switch (position) {
-            case 0:
+        //Log.i("NevigationSelect",String.valueOf(id));
+        switch (id) {
+            case R.id.navigation_item_1:
+                //FragmentWatch currentFragment = (FragmentWatch)fragmentManager.findFragmentById(id);
+                //if(currentFragment == null || !currentFragment.isVisible()) return;
+                //Log.i("FragmentWatch","create");
+                //if (fragment.getId() == R.id.navigation_item_1) break;
                 fragment = new FragmentWatch();
-
+                break;
+            case R.id.navigation_item_2:
+                //FragmentLock currentFragment2 = (FragmentLock)fragmentManager.findFragmentById(id);
+                //if(currentFragment2 == null || !currentFragment2.isVisible()) return;
+                //Log.i("FragmentLock","create");
+                //if (fragment.getId() == R.id.navigation_item_2) break;
+                fragment = new FragmentLock();
                 break;
 
             default:
-                return;
+                fragment = new FragmentWatch();
         }
-
-        FragmentManager fragmentManager = getFragmentManager();
+        //Log.i("123","123");
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
+        toolbarTitle.setText(menuItem.getTitle());
     }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }

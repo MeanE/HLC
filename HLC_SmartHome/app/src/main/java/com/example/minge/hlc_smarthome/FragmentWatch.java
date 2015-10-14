@@ -110,7 +110,7 @@ public class FragmentWatch extends Fragment {
 
     @Override
     public void onDestroy() {
-        Log.i("Fragment", "onDestroy");
+        Log.i("FragmentWatch", "onDestroy");
         act.unbindService(connSensorDHT11);
         act.unbindService(connSensorFire);
         act.unbindService(connSensorWash);
