@@ -1,4 +1,4 @@
-# HLC_SmartHome
+# HLC
 Android
 
 此App是專門為智慧家庭所開發
