@@ -145,29 +145,29 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(MenuItem menuItem) {
         int id = menuItem.getItemId();
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = null;
+        Fragment fragment = null, currentFragment = fragmentManager.findFragmentById(R.id.content_frame);
 
         //Log.i("NevigationSelect",String.valueOf(id));
         switch (id) {
             case R.id.navigation_item_1:
-                //FragmentWatch currentFragment = (FragmentWatch)fragmentManager.findFragmentById(id);
-                //if(currentFragment == null || !currentFragment.isVisible()) return;
-                //Log.i("FragmentWatch","create");
-                //if (fragment.getId() == R.id.navigation_item_1) break;
+                if (currentFragment instanceof FragmentWatch) return;
                 fragment = new FragmentWatch();
                 break;
             case R.id.navigation_item_2:
-                //FragmentLock currentFragment2 = (FragmentLock)fragmentManager.findFragmentById(id);
-                //if(currentFragment2 == null || !currentFragment2.isVisible()) return;
-                //Log.i("FragmentLock","create");
-                //if (fragment.getId() == R.id.navigation_item_2) break;
+                if (currentFragment instanceof FragmentLock) return;
                 fragment = new FragmentLock();
                 break;
-
+            case R.id.navigation_item_3:
+                if (currentFragment instanceof FragmentPlug) return;
+                fragment = new FragmentPlug();
+                break;
+            case R.id.navigation_item_4:
+                if (currentFragment instanceof FragmentIFTTT) return;
+                fragment = new FragmentIFTTT();
+                break;
             default:
                 fragment = new FragmentWatch();
         }
-        //Log.i("123","123");
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         menuItem.setChecked(true);
