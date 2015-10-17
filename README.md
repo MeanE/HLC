@@ -17,4 +17,6 @@ Android
 智慧插座：對智慧插座進行開與關之控制
 
 
-IFTTT:IF THIS THEN THAT，此研究之最大目標，本APP目前只撰寫一測試範例為:當溫度高於N度及開啟電風扇
+IFTTT：IF THIS THEN THAT，此研究之最大目標。
+
+本APP目前只撰寫一測試範例為：當溫度高於N度及開啟電風扇
