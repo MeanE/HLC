@@ -22,7 +22,7 @@ public class FragmentPlug extends Fragment {
     private Activity act;
 
     ListView listView;
-    CharSequence items[] = {"投影螢幕", "插座"};
+    CharSequence items[] = {"投影螢幕", "電風扇"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

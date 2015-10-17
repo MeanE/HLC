@@ -28,7 +28,8 @@
             android:id="@+id/btn_on"
             android:layout_marginLeft="75dp"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/btn_off"/>
+            android:layout_toStartOf="@+id/btn_off"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="wrap_content"
