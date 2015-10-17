@@ -18,13 +18,12 @@
             android:gravity="center"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="8dp"
-            android:focusable="false"
-            android:clickable="false"/>
+            android:layout_marginLeft="8dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="開啟"
             android:id="@+id/btn_on"
             android:layout_marginLeft="75dp"
@@ -34,9 +33,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="關閉"
             android:id="@+id/btn_off"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="8dp" />
     </RelativeLayout>
 </LinearLayout>
