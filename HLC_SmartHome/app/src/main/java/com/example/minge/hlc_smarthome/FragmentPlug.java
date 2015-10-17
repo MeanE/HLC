@@ -23,6 +23,8 @@ public class FragmentPlug extends Fragment {
 
     ListView listView;
     CharSequence items[] = {"投影螢幕", "電風扇"};
+    CharSequence urlName[] = {"relay1", "relay2"};
+    int image[] = {R.drawable.ic_projector_screen, R.drawable.ic_fan};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class FragmentPlug extends Fragment {
 
                 TextView item = (TextView) listInView.findViewById(R.id.textView8);
                 item.setText(items[position]);
+                item.setCompoundDrawablesWithIntrinsicBounds(image[position], 0, 0, 0);
+                //item.setCompoundDrawablePadding(5);
 
                 Button btnOn = (Button) listInView.findViewById(R.id.btn_on);
                 btnOn.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +72,7 @@ public class FragmentPlug extends Fragment {
                             public void run() {
                                 try {
                                     URL url = null;
-                                    url = new URL("http://hlcsmarthome.ddns.net:8888/relay" + (position + 1) + "/?light=on");
+                                    url = new URL("http://hlcsmarthome.ddns.net:8888/" + urlName[position] + "/?light=on");
                                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                                     connection.setRequestMethod("GET");
                                     //current connect
@@ -95,7 +99,7 @@ public class FragmentPlug extends Fragment {
                             public void run() {
                                 try {
                                     URL url = null;
-                                    url = new URL("http://hlcsmarthome.ddns.net:8888/relay" + (position + 1) + "/?light=off");
+                                    url = new URL("http://hlcsmarthome.ddns.net:8888/" + urlName[position] + "/?light=off");
                                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                                     connection.setRequestMethod("GET");
                                     //current connect
