@@ -129,7 +129,7 @@ public class SensorFire extends Sensor {
                 .setSmallIcon(R.mipmap.logo)
                 .setLargeIcon(bitmap)
                 .setContentTitle("瓦斯爐")
-                .setContentText("是否忘記關閉了呢？")
+                .setContentText("偵測到火源，請盡速確認是否關閉！")
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = notifcationCompatBuilder.build();

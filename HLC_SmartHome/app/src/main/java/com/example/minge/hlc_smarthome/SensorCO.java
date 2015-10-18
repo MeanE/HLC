@@ -132,6 +132,7 @@ public class SensorCO extends Sensor {
                 .setLargeIcon(bitmap)
                 .setContentTitle("可燃氣體濃度")
                 .setContentText("濃度超標！請檢查熱水器/瓦斯桶/天然氣等有無異常。")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("濃度超標！請檢查熱水器/瓦斯桶/天然氣等有無異常。"))
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = notifcationCompatBuilder.build();
