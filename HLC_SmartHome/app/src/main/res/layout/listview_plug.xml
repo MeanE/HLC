@@ -15,11 +15,15 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/textView8"
-            android:gravity="center"
+            android:gravity="left|center"
+            android:singleLine="false"
+            android:maxEms="6"
+            android:maxLines="4"
+            android:lines="2"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:drawablePadding="5dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -30,7 +34,8 @@
             android:layout_marginLeft="75dp"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/btn_off"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:layout_centerInParent="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -40,6 +45,7 @@
             android:id="@+id/btn_off"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 </LinearLayout>

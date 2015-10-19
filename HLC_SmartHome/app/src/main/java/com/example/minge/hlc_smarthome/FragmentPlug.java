@@ -22,7 +22,7 @@ public class FragmentPlug extends Fragment {
     private Activity act;
 
     ListView listView;
-    CharSequence items[] = {"投影螢幕", "電風扇"};
+    CharSequence items[] = {"插座1\n投影螢幕", "插座2\n電風扇"};
     CharSequence urlName[] = {"relay1", "relay2"};
     int image[] = {R.drawable.ic_projector_screen, R.drawable.ic_fan};
 
