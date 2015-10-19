@@ -23,6 +23,8 @@ public class FragmentPlug extends Fragment {
 
     ListView listView;
     CharSequence items[] = {"插座1\n投影螢幕", "插座2\n電風扇"};
+    CharSequence buttonOnName[] = {"下", "開啟"};
+    CharSequence buttonOffName[] = {"上", "關閉"};
     CharSequence urlName[] = {"relay1", "relay2"};
     int image[] = {R.drawable.ic_projector_screen, R.drawable.ic_fan};
 
@@ -64,6 +66,7 @@ public class FragmentPlug extends Fragment {
                 //item.setCompoundDrawablePadding(5);
 
                 Button btnOn = (Button) listInView.findViewById(R.id.btn_on);
+                btnOn.setText(buttonOnName[position]);
                 btnOn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -91,6 +94,7 @@ public class FragmentPlug extends Fragment {
                 });
 
                 Button btnOff = (Button) listInView.findViewById(R.id.btn_off);
+                btnOff.setText(buttonOffName[position]);
                 btnOff.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

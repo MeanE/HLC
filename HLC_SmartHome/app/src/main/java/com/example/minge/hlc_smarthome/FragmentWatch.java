@@ -112,11 +112,17 @@ public class FragmentWatch extends Fragment {
     public void onDestroy() {
         Log.i("FragmentWatch", "onDestroy");
         act.unbindService(connSensorDHT11);
+        sensorDHT11.bindServiceToDead();
         act.unbindService(connSensorFire);
+        sensorFire.bindServiceToDead();
         act.unbindService(connSensorWash);
+        sensorWash.bindServiceToDead();
         act.unbindService(connSensorWindow);
+        sensorWindow.bindServiceToDead();
         act.unbindService(connSensorCO);
+        sensorCO.bindServiceToDead();
         act.unbindService(connSensorDoor);
+        sensorDoor.bindServiceToDead();
         //act.startService(itSensorCO);
         super.onDestroy();
     }

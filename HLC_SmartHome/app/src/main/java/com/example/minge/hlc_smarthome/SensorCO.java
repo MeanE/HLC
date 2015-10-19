@@ -34,7 +34,7 @@ public class SensorCO extends Sensor {
 
     final int NOTIFICATION_ID = 0xc1;
 
-    //Thread tService = null;
+    Thread bindThread = null;
 
     @Override
     protected void setURL() {
@@ -149,6 +149,12 @@ public class SensorCO extends Sensor {
         //startForeground(NOTIFICATION_ID, notification);
     }
 
+    @Override
+    protected void bindServiceToDead(){
+        bindThread.interrupt();
+        bindThread = null;
+    }
+
     public void onDestroy() {
         super.onDestroy();
     }
@@ -164,7 +170,7 @@ public class SensorCO extends Sensor {
         }
 
         void start() {
-            new Thread(new Runnable() {
+            bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -197,7 +203,9 @@ public class SensorCO extends Sensor {
                         }
                     }
                 }
-            }).start();
+            });
+
+            bindThread.start();
         }
     }
 }

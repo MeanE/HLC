@@ -37,6 +37,7 @@ public class SensorDHT11 extends Sensor {
 
     final int NOTIFICATION_ID = 0xa1;
 
+    Thread bindThread = null;
     @Override
     protected void setURL() {
         String channelID = "51197"; //DHT11(溫溼度)
@@ -182,6 +183,12 @@ public class SensorDHT11 extends Sensor {
     }
 
     @Override
+    protected void bindServiceToDead(){
+        bindThread.interrupt();
+        bindThread = null;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -197,10 +204,10 @@ public class SensorDHT11 extends Sensor {
         }
 
         void start() {
-            new Thread(new Runnable() {
+            bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (!act.isDestroyed()) {
                         try {
                             act.runOnUiThread(new Runnable() {
                                 @Override
@@ -222,7 +229,9 @@ public class SensorDHT11 extends Sensor {
                         }
                     }
                 }
-            }).start();
+            });
+
+            bindThread.start();
         }
     }
 }

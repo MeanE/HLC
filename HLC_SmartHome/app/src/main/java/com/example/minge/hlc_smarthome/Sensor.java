@@ -24,4 +24,6 @@ abstract  class Sensor extends Service {
 
     protected abstract void setUpNotification();
 
+    protected abstract void bindServiceToDead();
+
 }
