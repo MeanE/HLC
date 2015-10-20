@@ -34,8 +34,6 @@ public class SensorCO extends Sensor {
 
     final int NOTIFICATION_ID = 0xc1;
 
-    Thread bindThread = null;
-
     @Override
     protected void setURL() {
         String channelID = "55751"; //一氧化碳濃度(瓦斯)
@@ -149,12 +147,6 @@ public class SensorCO extends Sensor {
         //startForeground(NOTIFICATION_ID, notification);
     }
 
-    @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
-    }
-
     public void onDestroy() {
         super.onDestroy();
     }
@@ -170,7 +162,7 @@ public class SensorCO extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -203,9 +195,7 @@ public class SensorCO extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }

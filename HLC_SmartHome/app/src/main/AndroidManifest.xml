@@ -42,11 +42,6 @@
         <service android:name=".SensorWash" />
         <service android:name=".SensorWindow" />
 
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
-
         <service
             android:name=".IftttTemperatureFan"
             android:enabled="true"

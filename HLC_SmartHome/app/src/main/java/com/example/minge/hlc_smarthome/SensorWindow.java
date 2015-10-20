@@ -34,8 +34,6 @@ public class SensorWindow extends Sensor {
 
     final int NOTIFICATION_ID = 0xf1;
 
-    Thread bindThread = null;
-
     @Override
     protected void setURL() {
         String channelID = "55750"; //窗戶(門窗)
@@ -149,12 +147,6 @@ public class SensorWindow extends Sensor {
     }
 
     @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -170,7 +162,7 @@ public class SensorWindow extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -203,9 +195,7 @@ public class SensorWindow extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }

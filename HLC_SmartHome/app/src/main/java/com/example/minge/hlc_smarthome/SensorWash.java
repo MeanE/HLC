@@ -34,8 +34,6 @@ public class SensorWash extends Sensor {
 
     final int NOTIFICATION_ID = 0xb1;
 
-    Thread bindThread = null;
-
     @Override
     protected void setURL() {
         String channelID = "55749"; //洗衣機(震動)
@@ -154,12 +152,6 @@ public class SensorWash extends Sensor {
     }
 
     @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -175,7 +167,7 @@ public class SensorWash extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -208,9 +200,7 @@ public class SensorWash extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }

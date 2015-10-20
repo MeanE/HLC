@@ -34,8 +34,6 @@ public class SensorFire extends Sensor {
 
     final int NOTIFICATION_ID = 0xe1;
 
-    Thread bindThread = null;
-
     @Override
     protected void setURL() {
         String channelID = "55748"; //瓦斯爐(火焰)
@@ -149,12 +147,6 @@ public class SensorFire extends Sensor {
     }
 
     @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -170,7 +162,7 @@ public class SensorFire extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -203,9 +195,7 @@ public class SensorFire extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }

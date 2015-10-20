@@ -34,8 +34,6 @@ public class SensorDoor extends Sensor {
 
     final int NOTIFICATION_ID = 0xd1;
 
-    Thread bindThread = null;
-
     @Override
     protected void setURL() {
         String channelID = "55752"; //大門(人體)
@@ -149,12 +147,6 @@ public class SensorDoor extends Sensor {
     }
 
     @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -170,7 +162,7 @@ public class SensorDoor extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -205,9 +197,7 @@ public class SensorDoor extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }

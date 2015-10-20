@@ -8,10 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.RemoteViews;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -29,15 +26,12 @@ import java.net.URL;
  */
 public class SensorDHT11 extends Sensor {
     TextView tv_wet, tv_temperature;
-    Spinner sp_temperatureSign;
 
     String wet = "", temperature = "";
     double temp;
-    int spSelect;
 
     final int NOTIFICATION_ID = 0xa1;
 
-    Thread bindThread = null;
     @Override
     protected void setURL() {
         String channelID = "51197"; //DHT11(溫溼度)
@@ -56,33 +50,8 @@ public class SensorDHT11 extends Sensor {
         this.act = act;
         this.v = v;
 
-        //wet="";
-        temperature = "";
         tv_wet = (TextView) v.findViewById(R.id.tv_wet);
         tv_temperature = (TextView) v.findViewById(R.id.tv_temperature);
-        sp_temperatureSign = (Spinner) v.findViewById(R.id.sp_temperatureSign);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(act,
-                R.array.temperature, R.layout.spinner_temperature_sign);
-        adapter.setDropDownViewResource(R.layout.spinner_temperature_sign);
-        sp_temperatureSign.setAdapter(adapter);
-        sp_temperatureSign.setOnItemSelectedListener(new SpinnerActivity());
-    }
-
-    public class SpinnerActivity implements Spinner.OnItemSelectedListener {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if (!temperature.equals("")) {
-                String tempString = tv_temperature.getText().toString();
-                Double temp = Double.parseDouble(tempString);
-                if (position == 0) temp = (temp - 32) * 5. / 9.;
-                else temp = temp * (9. / 5.) + 32;
-                tv_temperature.setText(String.format("%.1f", temp));
-            }
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
     }
 
     @Override
@@ -126,21 +95,17 @@ public class SensorDHT11 extends Sensor {
 
                         wet = String.format("%.1f%%", Double.parseDouble(jsonObj.get("field1").toString()));
 
-                        //spSelect = sp_temperatureSign.getSelectedItemPosition();
                         temp = Double.parseDouble(jsonObj.get("field2").toString());
-                        //if (spSelect == 1) temp = temp * (9. / 5.) + 32;
-                        //temperature = String.format("%.1f", temp);
                         /*
                             String dateUntransform = jsonObj.get("created_at").toString();
                             int d = dateUntransform.indexOf("T");
                             int t = dateUntransform.indexOf("+");
                             final String date = String.format("%s %s", dateUntransform.substring(0, d), dateUntransform.substring(d + 1, t));
                             */
-                        //Toast.makeText(getApplication(),"dht11",Toast.LENGTH_LONG);
-                        temperature = String.format("%.1f", temp);
+                        temperature = String.format("%.1f ", temp) + "℃";
                         setUpNotification();
 
-                        Thread.sleep(30000);
+                        Thread.sleep(22000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
@@ -172,20 +137,7 @@ public class SensorDHT11 extends Sensor {
         notification.contentView = remoteViews;
         notification.flags = Notification.FLAG_NO_CLEAR;
 
-        /*
-        //click notification return MainActivity
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.contentIntent = pendingIntent;
-        */
         startForeground(NOTIFICATION_ID, notification);
-    }
-
-    @Override
-    protected void bindServiceToDead(){
-        bindThread.interrupt();
-        bindThread = null;
     }
 
     @Override
@@ -204,24 +156,20 @@ public class SensorDHT11 extends Sensor {
         }
 
         void start() {
-            bindThread = new Thread(new Runnable() {
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (!act.isDestroyed()) {
+                    while (true) {
                         try {
                             act.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     tv_wet.setText(wet);
-
-                                    spSelect = sp_temperatureSign.getSelectedItemPosition();
-                                    if (spSelect == 1) temp = temp * (9. / 5.) + 32;
-                                    temperature = String.format("%.1f", temp);
                                     tv_temperature.setText(temperature);
                                 }
                             });
 
-                            if (wet != "" && temperature != "") Thread.sleep(30000);
+                            if (wet != "" && temperature != "") Thread.sleep(22000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (Exception e) {
@@ -229,9 +177,7 @@ public class SensorDHT11 extends Sensor {
                         }
                     }
                 }
-            });
-
-            bindThread.start();
+            }).start();
         }
     }
 }
