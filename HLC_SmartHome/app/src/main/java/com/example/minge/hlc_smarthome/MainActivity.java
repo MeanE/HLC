@@ -153,10 +153,11 @@ public class MainActivity extends AppCompatActivity {
                 if (currentFragment instanceof FragmentWatch) return;
                 fragment = new FragmentWatch();
                 break;
+            /*
             case R.id.navigation_item_2:
                 if (currentFragment instanceof FragmentLock) return;
                 fragment = new FragmentLock();
-                break;
+                break;*/
             case R.id.navigation_item_3:
                 if (currentFragment instanceof FragmentPlug) return;
                 fragment = new FragmentPlug();
