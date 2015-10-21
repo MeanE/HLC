@@ -126,7 +126,7 @@ public class SensorWindow extends Sensor {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_window);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.logo)
+                .setSmallIcon(R.drawable.ic_window_notification)
                 .setLargeIcon(bitmap)
                 .setContentTitle("窗戶")
                 .setContentText("是否忘記關閉了呢？")

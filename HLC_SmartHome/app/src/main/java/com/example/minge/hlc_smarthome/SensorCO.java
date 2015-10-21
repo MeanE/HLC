@@ -125,7 +125,7 @@ public class SensorCO extends Sensor {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_mask);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.logo)
+                .setSmallIcon(R.drawable.ic_mask_notification)
                 .setLargeIcon(bitmap)
                 .setContentTitle("可燃氣體濃度")
                 .setContentText("濃度超標！請檢查熱水器/瓦斯桶/天然氣等有無異常。")

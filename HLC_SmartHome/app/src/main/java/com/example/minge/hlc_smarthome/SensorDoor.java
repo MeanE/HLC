@@ -126,7 +126,7 @@ public class SensorDoor extends Sensor {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_doorlock);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.logo)
+                .setSmallIcon(R.drawable.ic_doorlock_notification)
                 .setLargeIcon(bitmap)
                 .setContentTitle("大門口")
                 .setContentText("疑似有閒雜人等徘迴！")

@@ -131,7 +131,7 @@ public class SensorWash extends Sensor {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_wash);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.logo)
+                .setSmallIcon(R.drawable.ic_wash_notification)
                 .setLargeIcon(bitmap)
                 .setContentTitle("洗衣機")
                 .setContentText("脫水中/洗淨完成。")

@@ -126,7 +126,7 @@ public class SensorFire extends Sensor {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_fire);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.logo)
+                .setSmallIcon(R.drawable.ic_fire_notification)
                 .setLargeIcon(bitmap)
                 .setContentTitle("瓦斯爐")
                 .setContentText("偵測到火源，請盡速確認是否關閉！")

@@ -10,10 +10,41 @@
         android:layout_height="match_parent"
         android:layout_gravity="center">
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_lock" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="門鎖狀態"
+            android:id="@+id/tv"
+            android:layout_gravity="center"
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_lock"
+            android:layout_gravity="center"
+            android:layout_below="@+id/tv_lockState"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="關閉"
+            android:id="@+id/tv_lockState"
+            android:layout_below="@+id/tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textSize="40dp"
+            android:textColor="#4CAF50" />
+
     </RelativeLayout>
+
 </FrameLayout>
