@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navView;
+    private FragmentManager fragmentManager;
 
     private Sensor sensorDHT11 = null, sensorFire = null, sensorWash = null, sensorWindow = null, sensorCO = null, sensorDoor = null;
     private Intent itSensorDHT11, itSensorFire, itSensorWash, itSensorWindow, itSensorCO, itSensorDoor;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new FragmentWatch()).commit();
     }
 
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(MenuItem menuItem) {
         int id = menuItem.getItemId();
-        FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null, currentFragment = fragmentManager.findFragmentById(R.id.content_frame);
 
         //Log.i("NevigationSelect",String.valueOf(id));
@@ -153,11 +153,10 @@ public class MainActivity extends AppCompatActivity {
                 if (currentFragment instanceof FragmentWatch) return;
                 fragment = new FragmentWatch();
                 break;
-            /*
             case R.id.navigation_item_2:
                 if (currentFragment instanceof FragmentLock) return;
                 fragment = new FragmentLock();
-                break;*/
+                break;
             case R.id.navigation_item_3:
                 if (currentFragment instanceof FragmentPlug) return;
                 fragment = new FragmentPlug();
@@ -197,6 +196,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

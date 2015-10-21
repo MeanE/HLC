@@ -27,12 +27,12 @@ import java.net.URL;
  * Created by MingE on 2015/9/29.
  */
 public class SensorDoor extends Sensor {
-    TextView tv_door;
+    private TextView tv_door;
 
-    int lastId = -1, id = 0;
-    boolean isError = false;
+    private int lastId = -1, id = 0;
+    private boolean isError = false;
 
-    final int NOTIFICATION_ID = 0xd1;
+    private final int NOTIFICATION_ID = 0xd1;
 
     @Override
     protected void setURL() {
@@ -81,13 +81,13 @@ public class SensorDoor extends Sensor {
 
     @Override
     public void onCreate() {
-        setURL();
-
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
+        setURL();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -100,7 +100,7 @@ public class SensorDoor extends Sensor {
 
                         if (lastId != id && lastId != -1) {
                             //if (intent.getStringExtra("onDestroy").equals("1"))
-                            if (act.isDestroyed())
+                            if (act == null)
                                 setUpNotification();
                             isError = true;
                             Thread.sleep(18000);
@@ -141,7 +141,7 @@ public class SensorDoor extends Sensor {
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.contentIntent = pendingIntent;
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
+        //NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
         //startForeground(NOTIFICATION_ID, notification);
     }
@@ -162,7 +162,7 @@ public class SensorDoor extends Sensor {
         }
 
         void start() {
-            new Thread(new Runnable() {
+            bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (!act.isDestroyed()) {
@@ -197,7 +197,9 @@ public class SensorDoor extends Sensor {
                         }
                     }
                 }
-            }).start();
+            });
+
+            bindThread.start();
         }
     }
 }

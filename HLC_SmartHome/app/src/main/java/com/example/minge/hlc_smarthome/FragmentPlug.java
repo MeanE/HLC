@@ -21,12 +21,12 @@ public class FragmentPlug extends Fragment {
     private View v;
     private Activity act;
 
-    ListView listView;
-    CharSequence items[] = {"插座1\n投影螢幕", "插座2\n電風扇"};
-    CharSequence buttonOnName[] = {"下", "開啟"};
-    CharSequence buttonOffName[] = {"上", "關閉"};
-    CharSequence urlName[] = {"relay1", "relay2"};
-    int image[] = {R.drawable.ic_projector_screen, R.drawable.ic_fan};
+    private ListView listView;
+    private CharSequence items[] = {"插座1\n投影螢幕", "插座2\n電風扇"};
+    private CharSequence buttonOnName[] = {"下", "開啟"};
+    private CharSequence buttonOffName[] = {"上", "關閉"};
+    private CharSequence urlName[] = {"relay1", "relay2"};
+    private int image[] = {R.drawable.ic_projector_screen, R.drawable.ic_fan};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

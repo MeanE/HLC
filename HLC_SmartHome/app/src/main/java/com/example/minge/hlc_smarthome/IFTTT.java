@@ -1,6 +1,7 @@
 package com.example.minge.hlc_smarthome;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.view.View;
 
@@ -15,6 +16,9 @@ abstract class IFTTT extends Service{
     protected URL url;
     protected Activity act;
     protected View v;
+    protected Thread thread = null;
+    protected boolean RUN_THREAD = true;
+    protected NotificationManager notificationManager;
 
     protected abstract JSONObject getJSON(URL a);
 

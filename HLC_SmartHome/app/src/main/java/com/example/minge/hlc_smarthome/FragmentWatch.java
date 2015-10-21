@@ -35,6 +35,7 @@ public class FragmentWatch extends Fragment {
         connSensorDHT11 = setServiceConnection(sensorDHT11.getClass().getSimpleName());
         //Log.i("sensorDHT11", sensorDHT11.getClass().getSimpleName());
         act.bindService(itSensorDHT11, connSensorDHT11, Context.BIND_AUTO_CREATE);
+        //sensorDHT11.initSharedPreferences();
 
         sensorFire = act.getSensorFire();
         itSensorFire = new Intent(act, SensorFire.class);
@@ -118,6 +119,16 @@ public class FragmentWatch extends Fragment {
         act.unbindService(connSensorCO);
         act.unbindService(connSensorDoor);
         //act.startService(itSensorCO);
+        try {
+            sensorDHT11.bindServiceToDead();
+            sensorFire.bindServiceToDead();
+            sensorWash.bindServiceToDead();
+            sensorWindow.bindServiceToDead();
+            sensorCO.bindServiceToDead();
+            sensorDoor.bindServiceToDead();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 }

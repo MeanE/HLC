@@ -16,12 +16,12 @@ public class FragmentIFTTT extends Fragment {
     private View v;
     private MainActivity act;
 
-    ListView listView;
-    CharSequence items[] = {"當溫度大於30度時，開啟電風扇"};
-    CharSequence urlName[] = {"relay2"};
-    int image[] = {R.drawable.ic_fan};
+    private ListView listView;
+    private CharSequence items[] = {"當溫度大於30度時，開啟電風扇"};
+    private CharSequence urlName[] = {"relay2"};
+    private int image[] = {R.drawable.ic_fan};
 
-    IFTTT iftttTemperatureFan = null;
+    private IFTTT iftttTemperatureFan = null;
     private Intent itIftttTemperatureFan = null;
 
     @Override

@@ -21,11 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class IftttTemperatureFan extends IFTTT {
-
-    Thread thread = null;
-    boolean RUN_THREAD = true;
-
-    final int NOTIFICATION_ID = 0xa2;
+    private final int NOTIFICATION_ID = 0xa2;
 
     @Override
     protected void setURL() {
@@ -66,6 +62,8 @@ public class IftttTemperatureFan extends IFTTT {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        RUN_THREAD = true;
+        notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
         setURL();
         thread = new Thread(new Runnable() {
             @Override
@@ -146,7 +144,6 @@ public class IftttTemperatureFan extends IFTTT {
         Notification notification = notifcationCompatBuilder.build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
     }
     @Override
@@ -163,7 +160,6 @@ public class IftttTemperatureFan extends IFTTT {
         Notification notification = notifcationCompatBuilder.build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notification);
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="溫濕度"
+        android:key="pref_DHT11">
+
+        <SwitchPreference android:title="溫濕度推播訊息"
+            android:key="dht11Notification"
+            android:defaultValue="true"/>
+
+        <ListPreference android:title="溫度單位"
+            android:summary="%s"
+            android:key="temperatureUnits"
+            android:defaultValue="0"
+            android:entries="@array/temperature"
+            android:entryValues="@array/temperatureUnits" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

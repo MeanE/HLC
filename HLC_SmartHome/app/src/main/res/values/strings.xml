@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HLC</string>
-
     <string name="action_settings">設定</string>
 
     <string name="title_activity_splash_screen">SplashScreen</string>
@@ -8,9 +7,19 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="title_activity_settings">Settings</string>
     <string-array name="temperature">
+        <item>攝氏(℃)</item>
+        <item>華氏(℉)</item>
+    </string-array>
+    <string-array name="temperatureUnits">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="temperatureSign">
         <item>℃</item>
         <item>℉</item>
     </string-array>
+
 
 </resources>
