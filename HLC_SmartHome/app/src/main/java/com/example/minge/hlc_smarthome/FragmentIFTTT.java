@@ -17,12 +17,11 @@ public class FragmentIFTTT extends Fragment {
     private MainActivity act;
 
     private ListView listView;
-    private CharSequence items[] = {"當溫度大於30度時，開啟電風扇"};
-    private CharSequence urlName[] = {"relay2"};
-    private int image[] = {R.drawable.ic_fan};
+    private CharSequence items[] = {"當溫度大於30度時，開啟電風扇", "當有人接近門口時，開啟電燈"};
+    private int image[] = {R.drawable.ic_fan ,R.drawable.ic_light};
 
-    private IFTTT iftttTemperatureFan = null;
-    private Intent itIftttTemperatureFan = null;
+    private IFTTT iftttTemperatureFan = null ,iftttDoorLight = null;
+    private Intent itIftttTemperatureFan = null ,itIftttDoorLight = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +37,9 @@ public class FragmentIFTTT extends Fragment {
     private void initIFTTT() {
         iftttTemperatureFan = new IftttTemperatureFan();
         itIftttTemperatureFan = new Intent(act, IftttTemperatureFan.class);
+
+        iftttDoorLight = new IftttDoorLight();
+        itIftttDoorLight = new Intent(act, IftttDoorLight.class);
     }
 
     private void setListView() {
@@ -71,10 +73,26 @@ public class FragmentIFTTT extends Fragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if(isChecked){
-                            act.startService(itIftttTemperatureFan);
+                            switch (position){
+                                case 0:
+                                    act.startService(itIftttTemperatureFan);
+                                    break;
+                                case 1:
+                                    act.startService(itIftttDoorLight);
+                                    break;
+                            }
+
                         }
                         else{
-                            act.stopService(itIftttTemperatureFan);
+                            switch (position){
+                                case 0:
+                                    act.stopService(itIftttTemperatureFan);
+                                    break;
+                                case 1:
+                                    act.stopService(itIftttDoorLight);
+                                    break;
+                            }
+
                         }
                     }
                 });
