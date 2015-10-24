@@ -1,7 +1,9 @@
 package com.example.minge.hlc_smarthome;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,20 +20,43 @@ public class FragmentIFTTT extends Fragment {
 
     private ListView listView;
     private CharSequence items[] = {"當溫度大於30度時，開啟電風扇", "當有人接近門口時，開啟電燈"};
-    private int image[] = {R.drawable.ic_fan ,R.drawable.ic_light};
+    private int image[] = {R.drawable.ic_fan, R.drawable.ic_light};
 
-    private IFTTT iftttTemperatureFan = null ,iftttDoorLight = null;
-    private Intent itIftttTemperatureFan = null ,itIftttDoorLight = null;
+    private IFTTT iftttTemperatureFan = null, iftttDoorLight = null;
+    private Intent itIftttTemperatureFan = null, itIftttDoorLight = null;
+
+    private SharedPreferences sharedPreferences;
+    private boolean tbtnState[] = new boolean[2];
+    private String prefKey[] = {"toggleButton0", "toggleButoon1"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_ifttt, container, false);
         act = (MainActivity) getActivity();
 
+        setPreference();
         initIFTTT();
+
         setListView();
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        setPreference();
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    private void setPreference() {
+        sharedPreferences = getActivity().getSharedPreferences("com.example.minge.hlc_smarthome", Context.MODE_PRIVATE);
+        for (int i = 0; i< prefKey.length; i++)
+            tbtnState[i] = sharedPreferences.getBoolean(prefKey[i], false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private void initIFTTT() {
@@ -68,12 +93,15 @@ public class FragmentIFTTT extends Fragment {
                 item.setText(items[position]);
                 item.setCompoundDrawablesWithIntrinsicBounds(image[position], 0, 0, 0);
 
-                final ToggleButton toggleButton =(ToggleButton) listInView.findViewById(R.id.toggleButton);
+                final ToggleButton toggleButton = (ToggleButton) listInView.findViewById(R.id.toggleButton);
+                toggleButton.setChecked(tbtnState[position]);
                 toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
-                            switch (position){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(prefKey[position], isChecked).commit();
+                        if (isChecked) {
+                            switch (position) {
                                 case 0:
                                     act.startService(itIftttTemperatureFan);
                                     break;
@@ -82,9 +110,8 @@ public class FragmentIFTTT extends Fragment {
                                     break;
                             }
 
-                        }
-                        else{
-                            switch (position){
+                        } else {
+                            switch (position) {
                                 case 0:
                                     act.stopService(itIftttTemperatureFan);
                                     break;
@@ -101,5 +128,4 @@ public class FragmentIFTTT extends Fragment {
             }
         });
     }
-
 }
