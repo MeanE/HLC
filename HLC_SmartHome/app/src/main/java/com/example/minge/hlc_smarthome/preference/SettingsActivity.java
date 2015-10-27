@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                             distance = -1;
                         }
                         Log.i("distance" , String.valueOf(distance));
-                        if (distance > 0 && distance <= 1.) {
+                        if (distance > 0 && distance <= 0.5) {
                             //Log.i("distance" , String.valueOf(distance));
                             openSmartLock();
                         }
