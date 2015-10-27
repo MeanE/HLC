@@ -49,7 +49,7 @@ public class FragmentIFTTT extends Fragment {
     }
 
     private void setPreference() {
-        sharedPreferences = getActivity().getSharedPreferences("com.example.minge.hlc_smarthome", Context.MODE_PRIVATE);
+        sharedPreferences = act.getSharedPreferences(act.getBaseContext().getPackageName(), Context.MODE_PRIVATE);
         for (int i = 0; i< prefKey.length; i++)
             tbtnState[i] = sharedPreferences.getBoolean(prefKey[i], false);
     }

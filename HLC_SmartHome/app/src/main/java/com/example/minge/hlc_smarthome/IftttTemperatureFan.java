@@ -23,6 +23,8 @@ import java.net.URL;
 public class IftttTemperatureFan extends IFTTT {
     private final int NOTIFICATION_ID = 0xa2;
 
+    private String relay = "relay2";
+
     @Override
     protected void setURL() {
         String channelID = "51197"; //DHT11(溫溼度)
@@ -76,10 +78,10 @@ public class IftttTemperatureFan extends IFTTT {
 
                         URL fanUrl = null;
                         if(check.equals("1")){
-                            JSONObject relay2JsonObj =getJSON(new URL("http://hlcsmarthome.ddns.net:8888/relay2/light.json"));
+                            JSONObject relay2JsonObj =getJSON(new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/light.json"));
                             String ralay2Check = relay2JsonObj.get("light").toString();
                             if(ralay2Check.equals("off")) {
-                                fanUrl = new URL("http://hlcsmarthome.ddns.net:8888/relay2/?light=on");
+                                fanUrl = new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/?light=on");
                                 HttpURLConnection connection = (HttpURLConnection) fanUrl.openConnection();
                                 connection.setRequestMethod("GET");
                                 //current connect
@@ -90,10 +92,10 @@ public class IftttTemperatureFan extends IFTTT {
                             }
                         }
                         else{
-                            JSONObject relay2JsonObj =getJSON(new URL("http://hlcsmarthome.ddns.net:8888/relay2/light.json"));
+                            JSONObject relay2JsonObj =getJSON(new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/light.json"));
                             String ralay2Check = relay2JsonObj.get("light").toString();
                             if(ralay2Check.equals("on")) {
-                                fanUrl = new URL("http://hlcsmarthome.ddns.net:8888/relay2/?light=off");
+                                fanUrl = new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/?light=off");
                                 HttpURLConnection connection = (HttpURLConnection) fanUrl.openConnection();
                                 connection.setRequestMethod("GET");
                                 //current connect

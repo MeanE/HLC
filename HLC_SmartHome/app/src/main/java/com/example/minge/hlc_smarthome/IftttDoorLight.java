@@ -29,6 +29,8 @@ public class IftttDoorLight extends IFTTT {
     private int lastId = -1, id = 0;
     private boolean isError = false;
 
+    private String relay = "relay2";
+
     @Override
     protected void setURL() {
         String channelID = "55752"; //大門(人體)
@@ -85,10 +87,10 @@ public class IftttDoorLight extends IFTTT {
 
                         URL lightUrl = null;
                         if (isError) {
-                            JSONObject relay3JsonObj = getJSON(new URL("http://hlcsmarthome.ddns.net:8888/relay3/light.json"));
+                            JSONObject relay3JsonObj = getJSON(new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/light.json"));
                             String ralay3Check = relay3JsonObj.get("light").toString();
                             if (ralay3Check.equals("off")) {
-                                lightUrl = new URL("http://hlcsmarthome.ddns.net:8888/relay3/?light=on");
+                                lightUrl = new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/?light=on");
                                 HttpURLConnection connection = (HttpURLConnection) lightUrl.openConnection();
                                 connection.setRequestMethod("GET");
                                 //current connect
@@ -98,10 +100,10 @@ public class IftttDoorLight extends IFTTT {
                                 setUpOnNotification();
                             }
                         } else {
-                            JSONObject relay3JsonObj = getJSON(new URL("http://hlcsmarthome.ddns.net:8888/relay3/light.json"));
+                            JSONObject relay3JsonObj = getJSON(new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/light.json"));
                             String ralay3Check = relay3JsonObj.get("light").toString();
                             if (ralay3Check.equals("on")) {
-                                lightUrl = new URL("http://hlcsmarthome.ddns.net:8888/relay3/?light=off");
+                                lightUrl = new URL("http://hlcsmarthome.ddns.net:8888/" + relay + "/?light=off");
                                 HttpURLConnection connection = (HttpURLConnection) lightUrl.openConnection();
                                 connection.setRequestMethod("GET");
                                 //current connect
