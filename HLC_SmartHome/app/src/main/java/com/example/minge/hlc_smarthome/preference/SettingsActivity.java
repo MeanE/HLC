@@ -31,7 +31,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private OnSharedPreferenceChangeListener listener = null;
 
     private Thread smartLockThread = null;
-    private String smartLockSSID = "WIFI17H2F";
+    private String smartLockSSID = "ESP8266";
     private double distance = -1;
     private WifiManager wifiManager;
 
