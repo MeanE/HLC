@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.sensor;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -13,6 +13,9 @@ import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,18 +29,18 @@ import java.net.URL;
 /**
  * Created by MingE on 2015/9/28.
  */
-public class SensorFire extends Sensor {
-    private TextView tv_fire;
+public class SensorCO extends Sensor {
+    private TextView tv_co;
 
     private int lastId = -1, id = 0;
     private boolean isError = false;
 
-    private final int NOTIFICATION_ID = 0xe1;
+    private final int NOTIFICATION_ID = 0xc1;
 
     @Override
     protected void setURL() {
-        String channelID = "55748"; //瓦斯爐(火焰)
-        String key = "MVAVXSAMB8XZQYEO";
+        String channelID = "55751"; //一氧化碳濃度(瓦斯)
+        String key = "9Q3UKOIDM2008FLJ";
         String urlString = "http://api.thingspeak.com/channels/" + channelID + "/feed/last.json" +
                 "?key=" + key;
         try {
@@ -48,11 +51,11 @@ public class SensorFire extends Sensor {
     }
 
     @Override
-    protected void initUI(Activity act, View v) {
+    public void initUI(Activity act, View v) {
         this.act = act;
         this.v = v;
 
-        tv_fire = (TextView) v.findViewById(R.id.tv_fire);
+        tv_co = (TextView) v.findViewById(R.id.tv_co);
     }
 
     @Override
@@ -95,12 +98,11 @@ public class SensorFire extends Sensor {
                     try {
                         JSONObject jsonObj = getJSON();
 
-                        //int status = Integer.parseInt(jsonObj.get("field1").toString());
                         id = Integer.parseInt(jsonObj.get("entry_id").toString());
 
                         if (lastId != id && lastId != -1) {
                             //if (intent.getStringExtra("onDestroy").equals("1"))
-                            if (act == null)
+                            if (v == null || !v.isShown())
                                 setUpNotification();
                             isError = true;
                             Thread.sleep(18000);
@@ -124,12 +126,13 @@ public class SensorFire extends Sensor {
     @Override
     protected void setUpNotification() {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_fire);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_mask);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_fire_notification)
+                .setSmallIcon(R.drawable.ic_mask_notification)
                 .setLargeIcon(bitmap)
-                .setContentTitle("瓦斯爐")
-                .setContentText("偵測到火源，請盡速確認是否關閉！")
+                .setContentTitle("可燃氣體濃度")
+                .setContentText("濃度超標！請檢查熱水器/瓦斯桶/天然氣等有無異常。")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("濃度超標！請檢查熱水器/瓦斯桶/天然氣等有無異常。"))
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = notifcationCompatBuilder.build();
@@ -137,7 +140,7 @@ public class SensorFire extends Sensor {
 
         Intent intent = new Intent(this, MainActivity.class);
         //click notification return MainActivity
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 4,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 2,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.contentIntent = pendingIntent;
 
@@ -146,7 +149,6 @@ public class SensorFire extends Sensor {
         //startForeground(NOTIFICATION_ID, notification);
     }
 
-    @Override
     public void onDestroy() {
         super.onDestroy();
     }
@@ -156,12 +158,12 @@ public class SensorFire extends Sensor {
         return new MyBinder();
     }
 
-    class MyBinder extends Binder {
-        SensorFire getService() {
-            return SensorFire.this;
+    public class MyBinder extends Binder {
+        public SensorCO getService() {
+            return SensorCO.this;
         }
 
-        void start() {
+        public void start() {
             bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -171,8 +173,8 @@ public class SensorFire extends Sensor {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        tv_fire.setText("開啟");
-                                        tv_fire.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
+                                        tv_co.setText("異常");
+                                        tv_co.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
                                     }
                                 });
                                 isError = false;
@@ -181,8 +183,8 @@ public class SensorFire extends Sensor {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        tv_fire.setText("未開啟");
-                                        tv_fire.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
+                                        tv_co.setText("無異常");
+                                        tv_co.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
                                     }
                                 });
                                 Thread.sleep(1000);

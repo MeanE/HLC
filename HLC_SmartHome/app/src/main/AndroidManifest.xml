@@ -36,20 +36,20 @@
             android:screenOrientation="portrait" >
         </activity>
 
-        <service android:name=".SensorDHT11" />
-        <service android:name=".SensorCO" />
-        <service android:name=".SensorDoor" />
-        <service android:name=".SensorFire" />
-        <service android:name=".SensorWash" />
-        <service android:name=".SensorWindow" />
+        <service android:name=".sensor.SensorDHT11" />
+        <service android:name=".sensor.SensorCO" />
+        <service android:name=".sensor.SensorDoor" />
+        <service android:name=".sensor.SensorFire" />
+        <service android:name=".sensor.SensorWash" />
+        <service android:name=".sensor.SensorWindow" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".preference.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
 
-        <service android:name=".IftttTemperatureFan"/>
-        <service android:name=".IftttDoorLight"/>
+        <service android:name=".ifttt.IftttTemperatureFan"/>
+        <service android:name=".ifttt.IftttDoorLight"/>
     </application>
 
 </manifest>

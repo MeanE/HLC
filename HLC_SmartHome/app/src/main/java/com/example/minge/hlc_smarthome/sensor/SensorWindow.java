@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.sensor;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -13,6 +13,9 @@ import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,20 +27,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by MingE on 2015/9/29.
+ * Created by MingE on 2015/9/28.
  */
-public class SensorDoor extends Sensor {
-    private TextView tv_door;
+public class SensorWindow extends Sensor {
+    private TextView tv_window;
 
     private int lastId = -1, id = 0;
     private boolean isError = false;
 
-    private final int NOTIFICATION_ID = 0xd1;
+    private final int NOTIFICATION_ID = 0xf1;
 
     @Override
     protected void setURL() {
-        String channelID = "55752"; //大門(人體)
-        String key = "RJ78ZHEKUT10RQC0";
+        String channelID = "55750"; //窗戶(門窗)
+        String key = "CGKJRKARQD7SE8KR";
         String urlString = "http://api.thingspeak.com/channels/" + channelID + "/feed/last.json" +
                 "?key=" + key;
         try {
@@ -48,11 +51,11 @@ public class SensorDoor extends Sensor {
     }
 
     @Override
-    protected void initUI(Activity act, View v) {
+    public void initUI(Activity act, View v) {
         this.act = act;
         this.v = v;
 
-        tv_door = (TextView) v.findViewById(R.id.tv_door);
+        tv_window = (TextView) v.findViewById(R.id.tv_window);
     }
 
     @Override
@@ -100,7 +103,7 @@ public class SensorDoor extends Sensor {
 
                         if (lastId != id && lastId != -1) {
                             //if (intent.getStringExtra("onDestroy").equals("1"))
-                            if (act == null)
+                            if (v == null || !v.isShown())
                                 setUpNotification();
                             isError = true;
                             Thread.sleep(18000);
@@ -124,12 +127,12 @@ public class SensorDoor extends Sensor {
     @Override
     protected void setUpNotification() {
         NotificationCompat.Builder notifcationCompatBuilder = new NotificationCompat.Builder(this);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_doorlock);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_window);
         notifcationCompatBuilder.setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_doorlock_notification)
+                .setSmallIcon(R.drawable.ic_window_notification)
                 .setLargeIcon(bitmap)
-                .setContentTitle("大門口")
-                .setContentText("疑似有閒雜人等徘迴！")
+                .setContentTitle("窗戶")
+                .setContentText("是否忘記關閉了呢？")
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = notifcationCompatBuilder.build();
@@ -137,7 +140,7 @@ public class SensorDoor extends Sensor {
 
         Intent intent = new Intent(this, MainActivity.class);
         //click notification return MainActivity
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 3,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 4,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.contentIntent = pendingIntent;
 
@@ -156,12 +159,12 @@ public class SensorDoor extends Sensor {
         return new MyBinder();
     }
 
-    class MyBinder extends Binder {
-        SensorDoor getService() {
-            return SensorDoor.this;
+    public class MyBinder extends Binder {
+        public SensorWindow getService() {
+            return SensorWindow.this;
         }
 
-        void start() {
+        public void start() {
             bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -171,22 +174,20 @@ public class SensorDoor extends Sensor {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        tv_door.setText("有異物");
-                                        tv_door.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
+                                        tv_window.setText("開啟");
+                                        tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_exclamation, 0);
                                     }
                                 });
                                 isError = false;
-                                //Log.i("SensorDoor","error");
                                 Thread.sleep(18000);
                             } else {
                                 act.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        tv_door.setText("淨空");
-                                        tv_door.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
+                                        tv_window.setText("關閉");
+                                        tv_window.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_check, 0);
                                     }
                                 });
-                                //Log.i("SensorDoor","normal");
                                 Thread.sleep(1000);
                             }
 

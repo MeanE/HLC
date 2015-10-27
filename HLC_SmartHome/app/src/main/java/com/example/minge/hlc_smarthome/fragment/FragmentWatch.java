@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.fragment;
 
 import android.app.Fragment;
 import android.content.ComponentName;
@@ -11,6 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
+import com.example.minge.hlc_smarthome.sensor.Sensor;
+import com.example.minge.hlc_smarthome.sensor.SensorCO;
+import com.example.minge.hlc_smarthome.sensor.SensorDHT11;
+import com.example.minge.hlc_smarthome.sensor.SensorDoor;
+import com.example.minge.hlc_smarthome.sensor.SensorFire;
+import com.example.minge.hlc_smarthome.sensor.SensorWash;
+import com.example.minge.hlc_smarthome.sensor.SensorWindow;
 
 public class FragmentWatch extends Fragment {
     private MainActivity act;

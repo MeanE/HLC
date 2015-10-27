@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.ifttt;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
+
+import com.example.minge.hlc_smarthome.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

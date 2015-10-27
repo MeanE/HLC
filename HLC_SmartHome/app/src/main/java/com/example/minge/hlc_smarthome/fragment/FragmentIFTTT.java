@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -13,6 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
+import com.example.minge.hlc_smarthome.ifttt.IFTTT;
+import com.example.minge.hlc_smarthome.ifttt.IftttDoorLight;
+import com.example.minge.hlc_smarthome.ifttt.IftttTemperatureFan;
 
 public class FragmentIFTTT extends Fragment {
     private View v;

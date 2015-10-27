@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.preference;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

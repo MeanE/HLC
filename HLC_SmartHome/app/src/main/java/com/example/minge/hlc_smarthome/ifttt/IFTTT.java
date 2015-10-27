@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.ifttt;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -12,7 +12,7 @@ import java.net.URL;
 /**
  * Created by MingE on 2015/10/19.
  */
-abstract class IFTTT extends Service{
+public abstract class IFTTT extends Service{
     protected URL url;
     protected Activity act;
     protected View v;

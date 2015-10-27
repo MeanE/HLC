@@ -15,4 +15,13 @@
             android:entryValues="@array/temperatureUnits" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="智慧門鎖"
+        android:key="pref_smartLock">
+
+        <SwitchPreference android:title="自動開啟門鎖"
+            android:key="smarLockEnable"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
 </PreferenceScreen>

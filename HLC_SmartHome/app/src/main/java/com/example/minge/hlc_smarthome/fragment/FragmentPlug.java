@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.minge.hlc_smarthome.R;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

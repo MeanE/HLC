@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.sensor;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -12,7 +12,7 @@ import java.net.URL;
 /**
  * Created by MingE on 2015/9/28.
  */
-abstract  class Sensor extends Service {
+abstract public class Sensor extends Service {
     protected URL url;
     protected Activity act;
     protected View v;
@@ -23,10 +23,10 @@ abstract  class Sensor extends Service {
 
     protected abstract void setURL();
 
-    protected abstract void initUI(Activity act, View v);
+    public abstract void initUI(Activity act, View v);
 
     protected abstract void setUpNotification();
 
-    protected void bindServiceToDead() throws InterruptedException{bindThread.interrupt(); bindThread = null;}
+    public void bindServiceToDead() throws InterruptedException{bindThread.interrupt(); bindThread = null;}
 
 }

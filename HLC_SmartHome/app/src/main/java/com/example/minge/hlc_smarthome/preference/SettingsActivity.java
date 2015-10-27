@@ -1,10 +1,12 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.preference;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.example.minge.hlc_smarthome.R;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override

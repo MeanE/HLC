@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.sensor;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
+import com.example.minge.hlc_smarthome.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +58,7 @@ public class SensorDHT11 extends Sensor {
     }
 
     @Override
-    protected void initUI(Activity act, View v) {
+    public void initUI(Activity act, View v) {
         this.act = act;
         this.v = v;
 
@@ -208,12 +210,12 @@ public class SensorDHT11 extends Sensor {
         return new MyBinder();
     }
 
-    class MyBinder extends Binder {
-        SensorDHT11 getService() {
+    public class MyBinder extends Binder {
+        public SensorDHT11 getService() {
             return SensorDHT11.this;
         }
 
-        void start() {
+        public void start() {
             bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {

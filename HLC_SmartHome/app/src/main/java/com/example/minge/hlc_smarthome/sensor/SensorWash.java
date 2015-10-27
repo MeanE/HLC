@@ -1,4 +1,4 @@
-package com.example.minge.hlc_smarthome;
+package com.example.minge.hlc_smarthome.sensor;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -12,6 +12,9 @@ import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.minge.hlc_smarthome.MainActivity;
+import com.example.minge.hlc_smarthome.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +51,7 @@ public class SensorWash extends Sensor {
     }
 
     @Override
-    protected void initUI(Activity act, View v) {
+    public void initUI(Activity act, View v) {
         this.act = act;
         this.v = v;
 
@@ -103,7 +106,7 @@ public class SensorWash extends Sensor {
                             isError = true;
                             Thread.sleep(18000);
                         } else {
-                            if (act == null && washTime >= 1) {
+                            if ((v == null || !v.isShown()) && washTime >= 1) {
                                 //if (intent.getStringExtra("onDestroy").equals("1"))
                                 setUpNotification();
                                 washTime = 0;
@@ -161,12 +164,12 @@ public class SensorWash extends Sensor {
         return new MyBinder();
     }
 
-    class MyBinder extends Binder {
-        SensorWash getService() {
+    public class MyBinder extends Binder {
+        public SensorWash getService() {
             return SensorWash.this;
         }
 
-        void start() {
+        public void start() {
             bindThread = new Thread(new Runnable() {
                 @Override
                 public void run() {

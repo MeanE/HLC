@@ -17,6 +17,19 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.minge.hlc_smarthome.fragment.FragmentIFTTT;
+import com.example.minge.hlc_smarthome.fragment.FragmentLock;
+import com.example.minge.hlc_smarthome.fragment.FragmentPlug;
+import com.example.minge.hlc_smarthome.fragment.FragmentWatch;
+import com.example.minge.hlc_smarthome.preference.SettingsActivity;
+import com.example.minge.hlc_smarthome.sensor.Sensor;
+import com.example.minge.hlc_smarthome.sensor.SensorCO;
+import com.example.minge.hlc_smarthome.sensor.SensorDHT11;
+import com.example.minge.hlc_smarthome.sensor.SensorDoor;
+import com.example.minge.hlc_smarthome.sensor.SensorFire;
+import com.example.minge.hlc_smarthome.sensor.SensorWash;
+import com.example.minge.hlc_smarthome.sensor.SensorWindow;
+
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolbarTitle;
