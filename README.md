@@ -20,7 +20,7 @@ Android
 IFTTT：IF THIS THEN THAT，此研究之最大目標。
 
 
-本APP目前測試範例為：
+本APP目前IFTTT情境範例為：
 
 
 1.當溫度高於30度時開啟電風扇
