@@ -35,8 +35,8 @@ public class IftttDoorLight extends IFTTT {
 
     @Override
     protected void setURL() {
-        String channelID = "55752"; //大門(人體)
-        String key = "RJ78ZHEKUT10RQC0";
+        String channelID = "55750"; //窗戶(門窗)
+        String key = "CGKJRKARQD7SE8KR";
         String urlString = "http://api.thingspeak.com/channels/" + channelID + "/feed/last.json" +
                 "?key=" + key;
         try {

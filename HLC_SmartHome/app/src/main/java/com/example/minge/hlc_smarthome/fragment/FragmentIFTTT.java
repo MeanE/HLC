@@ -25,7 +25,7 @@ public class FragmentIFTTT extends Fragment {
     private MainActivity act;
 
     private ListView listView;
-    private CharSequence items[] = {"當溫度大於30度時，開啟電風扇", "當有人接近門口時，開啟電燈"};
+    private CharSequence items[] = {"當溫度大於30度時，開啟電風扇", "當開啟大門時，開啟玄關電燈"};
     private int image[] = {R.drawable.ic_fan, R.drawable.ic_light};
 
     private IFTTT iftttTemperatureFan = null, iftttDoorLight = null;

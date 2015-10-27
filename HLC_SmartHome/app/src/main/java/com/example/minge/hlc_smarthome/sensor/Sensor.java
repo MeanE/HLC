@@ -27,6 +27,6 @@ abstract public class Sensor extends Service {
 
     protected abstract void setUpNotification();
 
-    public void bindServiceToDead() throws InterruptedException{bindThread.interrupt(); bindThread = null;}
+    public void bindServiceToDead() throws Exception{bindThread.interrupt(); bindThread = null;}
 
 }

@@ -103,7 +103,7 @@ public class FragmentLock extends Fragment {
                                     }
                                 }).start();
                             }
-                        }, 8000);
+                        }, 10000);
 
                         ibtn_lock.getDrawable().setAlpha(255);
                         ibtn_lock.invalidate();

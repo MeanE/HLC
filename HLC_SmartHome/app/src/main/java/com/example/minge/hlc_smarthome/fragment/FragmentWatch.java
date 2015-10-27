@@ -136,7 +136,7 @@ public class FragmentWatch extends Fragment {
             sensorWindow.bindServiceToDead();
             sensorCO.bindServiceToDead();
             sensorDoor.bindServiceToDead();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         super.onDestroy();
