@@ -1,11 +1,10 @@
 # HLC
+Icons Lilicense:https://creativecommons.org/licenses/by-nd/3.0/
+
+
 Android
 
 此App是專門為智慧家庭所開發
-
-
-Icons Lilicense:https://creativecommons.org/licenses/by-nd/3.0/
-
 
 
 目前提供四大功能：智慧監看、智慧門鎖、智慧插座、IFTTT
