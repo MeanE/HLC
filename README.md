@@ -1,5 +1,5 @@
 # HLC
-Icons Lilicense:https://creativecommons.org/licenses/by-nd/3.0/
+Icons Lilicense:https://icons8.com/license/
 
 
 Android
